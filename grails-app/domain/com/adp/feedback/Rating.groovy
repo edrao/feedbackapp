@@ -1,8 +1,16 @@
 package com.adp.feedback
 
+/**
+ * Feedback rating Domain class
+ */
+
 class Rating {
 
+    //feedback  category
+
     Category category
+
+    //rating value
 
     float rating
 

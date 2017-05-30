@@ -3,9 +3,9 @@ package com.adp.feedback
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(FeedbackController)
-@Mock(Feedback)
-class FeedbackControllerSpec extends Specification {
+@TestFor(RatingController)
+@Mock(Rating)
+class RatingControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class FeedbackControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.feedbackList
-            model.feedbackCount == 0
+            !model.ratingList
+            model.ratingCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class FeedbackControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.feedback!= null
+            model.rating!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -38,25 +38,25 @@ class FeedbackControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def feedback = new Feedback()
-            feedback.validate()
-            controller.save(feedback)
+            def rating = new Rating()
+            rating.validate()
+            controller.save(rating)
 
         then:"The create view is rendered again with the correct model"
-            model.feedback!= null
+            model.rating!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            feedback = new Feedback(params)
+            rating = new Rating(params)
 
-            controller.save(feedback)
+            controller.save(rating)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/feedback/show/1'
+            response.redirectedUrl == '/rating/show/1'
             controller.flash.message != null
-            Feedback.count() == 1
+            Rating.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +68,11 @@ class FeedbackControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def feedback = new Feedback(params)
-            controller.show(feedback)
+            def rating = new Rating(params)
+            controller.show(rating)
 
         then:"A model is populated containing the domain instance"
-            model.feedback == feedback
+            model.rating == rating
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +84,11 @@ class FeedbackControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def feedback = new Feedback(params)
-            controller.edit(feedback)
+            def rating = new Rating(params)
+            controller.edit(rating)
 
         then:"A model is populated containing the domain instance"
-            model.feedback == feedback
+            model.rating == rating
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -98,28 +98,28 @@ class FeedbackControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/feedback/index'
+            response.redirectedUrl == '/rating/index'
             flash.message != null
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def feedback = new Feedback()
-            feedback.validate()
-            controller.update(feedback)
+            def rating = new Rating()
+            rating.validate()
+            controller.update(rating)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.feedback == feedback
+            model.rating == rating
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            feedback = new Feedback(params).save(flush: true)
-            controller.update(feedback)
+            rating = new Rating(params).save(flush: true)
+            controller.update(rating)
 
         then:"A redirect is issued to the show action"
-            feedback != null
-            response.redirectedUrl == "/feedback/show/$feedback.id"
+            rating != null
+            response.redirectedUrl == "/rating/show/$rating.id"
             flash.message != null
     }
 
@@ -130,23 +130,23 @@ class FeedbackControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/feedback/index'
+            response.redirectedUrl == '/rating/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def feedback = new Feedback(params).save(flush: true)
+            def rating = new Rating(params).save(flush: true)
 
         then:"It exists"
-            Feedback.count() == 1
+            Rating.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(feedback)
+            controller.delete(rating)
 
         then:"The instance is deleted"
-            Feedback.count() == 0
-            response.redirectedUrl == '/feedback/index'
+            Rating.count() == 0
+            response.redirectedUrl == '/rating/index'
             flash.message != null
     }
 }

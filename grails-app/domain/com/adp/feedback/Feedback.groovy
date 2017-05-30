@@ -20,10 +20,14 @@ class Feedback {
 
     Date submittedDate = new Date()
 
+    //Feedback request - if it is asked by an employee
+    FbkRequest fbkRequest
+
     //Constraints
     static constraints = {
         submitter nullable: true
         receiver nullable: false
+        fbkRequest nullable: true
     }
 
 
@@ -31,10 +35,11 @@ class Feedback {
     static mapping = {
         table 'feedback'
         version false
-        id column: 'comment_id'
+        id column: 'id'
         submitter column: 'submitter'
         receiver column: 'receiver'
         status column: 'status'
+        fbkRequest column: 'request'
         hasMany joinTable: [name: 'feedback_ratings',
                             key: 'comment_id',
                             column: 'rating']

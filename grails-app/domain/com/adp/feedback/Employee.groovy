@@ -1,7 +1,8 @@
 package com.adp.feedback
 
 /**
- * Assumption : Employee details  are retrieved from DB. Using LDAP is Out of scope of this Case Study
+ * Employee Domain class
+ * Assumption : Employee details  are stored in DB. Using LDAP is Out of scope of this Case Study
  */
 
 class Employee {
@@ -23,7 +24,12 @@ class Employee {
     //TODO - encode it while saving
     String password
 
+    //Employee reportsTo
     Employee reportsTo
+
+    //Employee designation
+
+    Designation designation
 
     //Constraints
     static constraints = {
@@ -33,6 +39,7 @@ class Employee {
         employeeId nullable: false
         email email: true, blank: false
         password size: 5..15, blank: false,nullable: false
+        reportsTo nullable: true
     }
 
     //DB mappings
@@ -46,5 +53,10 @@ class Employee {
         username column: 'username'
         password column: 'password'
         reportsTo column: 'reports_to'
+        designation column: 'designation'
+    }
+
+    String toString() {
+        return this.firstName+" "+this.lastName
     }
 }
