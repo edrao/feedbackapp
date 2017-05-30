@@ -99,8 +99,10 @@ hibernate:
 dataSource:
     pooled: true
     jmxExport: true
-    driverClassName:  com.mysql.jdbc.Driver
-    username: root
+   # driverClassName:  com.mysql.jdbc.Driver
+   # username: root
+    driverClassName:  org.h2.Driver
+    username: sa
     password:
 
 environments:
@@ -108,8 +110,7 @@ environments:
         dataSource:
             logSql: true
             dbCreate: create-drop
-            url: jdbc:mysql://127.0.0.1:3306/employeefeedback
-
+            url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE;mv_store=false
     test:
         dataSource:
             dbCreate: update
