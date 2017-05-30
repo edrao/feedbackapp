@@ -8,4 +8,11 @@ class Rating {
 
     static constraints = {
     }
+
+    static mapping = {
+        table 'rating'
+        version false
+        rating column: 'rating'
+
+    }
 }

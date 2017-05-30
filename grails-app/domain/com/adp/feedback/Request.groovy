@@ -2,14 +2,17 @@ package com.adp.feedback
 
 class Request {
 
-    Employee requestor
+    Employee from
 
-    Employee submitter
+    Employee to
 
     String emailMessage
 
 
-
     static constraints = {
+    }
+
+    static mappings = {
+        table 'request'
     }
 }
