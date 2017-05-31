@@ -21,7 +21,7 @@ class FeedbackRequest {
     static constraints = {
     }
 
-    static mappings = {
-        table 'request'
+    static mapping = {
+        table 'feedbackrequest'
     }
 }

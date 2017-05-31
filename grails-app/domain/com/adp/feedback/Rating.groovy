@@ -13,9 +13,12 @@ class Rating {
 
     //rating value
 
-    float rating
+    Float rating
 
     static constraints = {
+
+        category nullable: false
+        rating nullable: false
     }
 
     static mapping = {

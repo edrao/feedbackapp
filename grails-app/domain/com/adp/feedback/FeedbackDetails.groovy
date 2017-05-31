@@ -11,6 +11,7 @@ class FeedbackDetails {
     //feedback received by
     Employee receiver
 
+    //enum status
     Status status
 
     String comments
@@ -32,16 +33,14 @@ class FeedbackDetails {
 
     //DB mapping
     static mapping = {
-        table 'feedback'
+        table 'feedbackdetails'
         version false
         id column: 'id'
         submitter column: 'submitter'
         receiver column: 'receiver'
         status column: 'status'
         fbkRequest column: 'request'
-        hasMany joinTable: [name: 'feedback_ratings',
-                            key: 'comment_id',
-                            column: 'rating']
+
 
     }
 
