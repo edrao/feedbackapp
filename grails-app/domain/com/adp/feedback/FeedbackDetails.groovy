@@ -11,9 +11,7 @@ class FeedbackDetails {
     //feedback received by
     Employee receiver
 
-    enum status{
-        DRAFT, SENT
-    }
+    Status status
 
     String comments
 

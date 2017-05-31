@@ -25,6 +25,11 @@ class FeedbackDetailsService {
                     eq('receiver', employee)
 
             }
+
+            and{
+                eq('status',Status.COMPLETED)
+            }
+
         }
 
         return feedbackList

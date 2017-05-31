@@ -12,9 +12,7 @@ class FeedbackRequest {
     // feedback asked from
     Employee to
 
-    enum status{
-        GIVEN,NOTGIVEN
-    }
+    Status status
 
     //Email message body
     String emailMessage

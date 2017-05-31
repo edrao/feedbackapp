@@ -1,5 +1,7 @@
 package com.adp.feedback
 
+import grails.converters.JSON
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,6 +9,8 @@ import grails.transaction.Transactional
 class FeedbackDetailsController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    FeedbackDetailsService feedbackDetailsService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -103,5 +107,14 @@ class FeedbackDetailsController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def retrieveFeedbackOfEmployee(long id){
+        Employee employee = Employee.get(id)
+        List<FeedbackDetails> feedbackList = feedbackDetailsService.retrieveFeedbackOfEmployee(employee)
+       def fbList =  feedbackList.collect {
+            ['from':it.submitter.username, to:it.receiver.username,'submittedDate':it.submittedDate,'rating':it.ratings.find{it1->(it1.category.name=='OverallRating')}]
+        }
+        render fbList as JSON
     }
 }
