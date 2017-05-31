@@ -10,8 +10,9 @@ class CategoryControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
 
-        params["name"] = 'testName'
-
+        // TODO: Populate valid properties like...
+        //params["name"] = 'someValidName'
+        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
     }
 
     void "Test the index action returns the correct model"() {

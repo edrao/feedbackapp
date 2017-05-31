@@ -1,9 +1,10 @@
 package com.adp.feedback
 
 /**
- * Feedback Domain class
+ * Created by dharma on 31/05/17.
+ * FeedbackDetails Domain class - To store all the feedbacks
  */
-class Feedback {
+class FeedbackDetails {
 
     //feedback submitted by
     Employee submitter
@@ -20,8 +21,8 @@ class Feedback {
 
     Date submittedDate = new Date()
 
-    //Feedback request - if it is asked by an employee
-    FbkRequest fbkRequest
+    //FeedbackDetails request - if it is asked by an employee
+    FeedbackRequest fbkRequest
 
     //Constraints
     static constraints = {

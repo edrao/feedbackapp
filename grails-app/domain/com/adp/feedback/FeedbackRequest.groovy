@@ -1,9 +1,10 @@
 package com.adp.feedback
 
 /**
- * Domain class for to capture Feedback Request ( if asked by an Employee)
+ * Created by dharma on 31/05/17.
+ * Domain class for to capture FeedbackDetails Request ( if asked by an Employee)
  */
-class FbkRequest {
+class FeedbackRequest {
 
     // feedback asked by
     Employee from

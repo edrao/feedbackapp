@@ -3,9 +3,9 @@ package com.adp.feedback
 import grails.test.mixin.*
 import spock.lang.*
 
-@TestFor(FbkRequestController)
-@Mock(FbkRequest)
-class FbkRequestControllerSpec extends Specification {
+@TestFor(FeedbackDetailsController)
+@Mock(FeedbackDetails)
+class FeedbackDetailsControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
@@ -21,8 +21,8 @@ class FbkRequestControllerSpec extends Specification {
             controller.index()
 
         then:"The model is correct"
-            !model.fbkRequestList
-            model.fbkRequestCount == 0
+            !model.feedbackDetailsList
+            model.feedbackDetailsCount == 0
     }
 
     void "Test the create action returns the correct model"() {
@@ -30,7 +30,7 @@ class FbkRequestControllerSpec extends Specification {
             controller.create()
 
         then:"The model is correctly created"
-            model.fbkRequest!= null
+            model.feedbackDetails!= null
     }
 
     void "Test the save action correctly persists an instance"() {
@@ -38,25 +38,25 @@ class FbkRequestControllerSpec extends Specification {
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
-            def fbkRequest = new FbkRequest()
-            fbkRequest.validate()
-            controller.save(fbkRequest)
+            def feedbackDetails = new FeedbackDetails()
+            feedbackDetails.validate()
+            controller.save(feedbackDetails)
 
         then:"The create view is rendered again with the correct model"
-            model.fbkRequest!= null
+            model.feedbackDetails!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
             response.reset()
             populateValidParams(params)
-            fbkRequest = new FbkRequest(params)
+            feedbackDetails = new FeedbackDetails(params)
 
-            controller.save(fbkRequest)
+            controller.save(feedbackDetails)
 
         then:"A redirect is issued to the show action"
-            response.redirectedUrl == '/fbkRequest/show/1'
+            response.redirectedUrl == '/feedbackDetails/show/1'
             controller.flash.message != null
-            FbkRequest.count() == 1
+            FeedbackDetails.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -68,11 +68,11 @@ class FbkRequestControllerSpec extends Specification {
 
         when:"A domain instance is passed to the show action"
             populateValidParams(params)
-            def fbkRequest = new FbkRequest(params)
-            controller.show(fbkRequest)
+            def feedbackDetails = new FeedbackDetails(params)
+            controller.show(feedbackDetails)
 
         then:"A model is populated containing the domain instance"
-            model.fbkRequest == fbkRequest
+            model.feedbackDetails == feedbackDetails
     }
 
     void "Test that the edit action returns the correct model"() {
@@ -84,11 +84,11 @@ class FbkRequestControllerSpec extends Specification {
 
         when:"A domain instance is passed to the edit action"
             populateValidParams(params)
-            def fbkRequest = new FbkRequest(params)
-            controller.edit(fbkRequest)
+            def feedbackDetails = new FeedbackDetails(params)
+            controller.edit(feedbackDetails)
 
         then:"A model is populated containing the domain instance"
-            model.fbkRequest == fbkRequest
+            model.feedbackDetails == feedbackDetails
     }
 
     void "Test the update action performs an update on a valid domain instance"() {
@@ -98,28 +98,28 @@ class FbkRequestControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
-            response.redirectedUrl == '/fbkRequest/index'
+            response.redirectedUrl == '/feedbackDetails/index'
             flash.message != null
 
         when:"An invalid domain instance is passed to the update action"
             response.reset()
-            def fbkRequest = new FbkRequest()
-            fbkRequest.validate()
-            controller.update(fbkRequest)
+            def feedbackDetails = new FeedbackDetails()
+            feedbackDetails.validate()
+            controller.update(feedbackDetails)
 
         then:"The edit view is rendered again with the invalid instance"
             view == 'edit'
-            model.fbkRequest == fbkRequest
+            model.feedbackDetails == feedbackDetails
 
         when:"A valid domain instance is passed to the update action"
             response.reset()
             populateValidParams(params)
-            fbkRequest = new FbkRequest(params).save(flush: true)
-            controller.update(fbkRequest)
+            feedbackDetails = new FeedbackDetails(params).save(flush: true)
+            controller.update(feedbackDetails)
 
         then:"A redirect is issued to the show action"
-            fbkRequest != null
-            response.redirectedUrl == "/fbkRequest/show/$fbkRequest.id"
+            feedbackDetails != null
+            response.redirectedUrl == "/feedbackDetails/show/$feedbackDetails.id"
             flash.message != null
     }
 
@@ -130,23 +130,23 @@ class FbkRequestControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
-            response.redirectedUrl == '/fbkRequest/index'
+            response.redirectedUrl == '/feedbackDetails/index'
             flash.message != null
 
         when:"A domain instance is created"
             response.reset()
             populateValidParams(params)
-            def fbkRequest = new FbkRequest(params).save(flush: true)
+            def feedbackDetails = new FeedbackDetails(params).save(flush: true)
 
         then:"It exists"
-            FbkRequest.count() == 1
+            FeedbackDetails.count() == 1
 
         when:"The domain instance is passed to the delete action"
-            controller.delete(fbkRequest)
+            controller.delete(feedbackDetails)
 
         then:"The instance is deleted"
-            FbkRequest.count() == 0
-            response.redirectedUrl == '/fbkRequest/index'
+            FeedbackDetails.count() == 0
+            response.redirectedUrl == '/feedbackDetails/index'
             flash.message != null
     }
 }

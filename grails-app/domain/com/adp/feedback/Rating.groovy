@@ -1,7 +1,8 @@
 package com.adp.feedback
 
 /**
- * Feedback rating Domain class
+ * Created by dharma on 31/05/17.
+ * FeedbackDetails rating Domain class
  */
 
 class Rating {
